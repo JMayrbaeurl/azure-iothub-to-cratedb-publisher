@@ -1,0 +1,11 @@
+﻿CREATE TABLE IF NOT EXISTS "chillertelemetrydata" (
+  "day_partition" TIMESTAMP GENERATED ALWAYS AS date_trunc('day', "ts"),
+  ts Timestamp,
+  deviceid string,
+  humidity Double,
+  pressure Double,
+  temperature Double,  
+  PRIMARY KEY ("deviceid", "ts", "day_partition")
+)
+CLUSTERED INTO 4 SHARDS
+PARTITIONED BY ("day_partition")
